@@ -1,6 +1,6 @@
 namespace MyFirstApi.Core.Ports.Repositories;
 
-using MyFirstApi.Core.Entities;
+using Entities;
 
 // Ini "port" — interface murni, tidak tahu implementasinya pakai apa
 public interface ILinkRepository

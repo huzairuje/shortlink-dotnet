@@ -1,6 +1,6 @@
 namespace MyFirstApi.Core.Ports.Services;
 
-using MyFirstApi.Core.Entities;
+using Entities;
 
 public interface ILinkService
 {

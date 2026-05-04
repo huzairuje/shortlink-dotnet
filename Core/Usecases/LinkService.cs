@@ -1,8 +1,8 @@
 namespace MyFirstApi.Core.UseCases;
 
-using MyFirstApi.Core.Entities;
-using MyFirstApi.Core.Ports.Repositories;
-using MyFirstApi.Core.Ports.Services;
+using Entities;
+using Ports.Repositories;
+using Ports.Services;
 
 // UseCase — hanya depends pada port (interface), tidak tahu infrastructure
 public class LinkService : ILinkService
