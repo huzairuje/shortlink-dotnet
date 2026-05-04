@@ -1,12 +1,21 @@
 using System.Text.Json;
 using MyFirstApi.Api.Endpoints;
+using MyFirstApi.Api.Swagger;
 using MyFirstApi.Infrastructure;
 using MyFirstApi.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SchemaFilter<SnakeCaseSchemaFilter>();
+});
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+});
 
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
