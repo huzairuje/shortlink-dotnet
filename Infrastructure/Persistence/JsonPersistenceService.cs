@@ -6,7 +6,13 @@ using MyFirstApi.Core.Entities;
 public class JsonPersistenceService
 {
     private readonly InMemoryLinkRepository _repository;
-    private const string FilePath = "links.json";
+    private readonly ILogger<JsonPersistenceService> _logger;
+
+    // Ambil dari env variable, fallback ke current directory
+    private static readonly string FilePath = Path.Combine(
+        Environment.GetEnvironmentVariable("DATA_PATH") ?? ".",
+        "links.json"
+    );
 
     private static readonly JsonSerializerOptions Options = new()
     {
