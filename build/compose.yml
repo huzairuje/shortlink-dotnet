@@ -6,9 +6,29 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development    # ← tambah ini
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:5000
       - DATA_PATH=/data
+      - ConnectionStrings__Redis=redis:6379    # ← Docker service name
     volumes:
       - ../data:/data
     restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy             # ← tunggu Redis ready dulu
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  redis_data:
